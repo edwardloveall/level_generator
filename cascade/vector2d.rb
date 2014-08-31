@@ -18,6 +18,6 @@ class Vector2d
   end
 
   def inspect
-    "(#{x},#{y})"
+    "(#{x}, #{y})"
   end
 end

@@ -1,9 +1,13 @@
 class Dot
-  attr_reader :position, :ring, :direction
+  attr_accessor :position, :ring, :direction
 
   def initialize(opts = {})
-    @position = opts[:position] || Vector2d.new(0, 0)
     @ring = opts[:ring]
+    if @ring
+      @position = @ring.position
+    else
+      @position = opts[:position] || Vector2d.new(0, 0)
+    end
     @direction = opts[:direction] || Vector2d.up
   end
 

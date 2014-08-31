@@ -5,14 +5,19 @@ class Level
   def initialize(seed = nil)
     @rings = []
     @dots = []
-    @seed = seed || Random.srand
+    @seed = seed || Random.new_seed
+    Random.srand(@seed)
+  end
+
+  def self.create_random
+    new.fill_randomly
   end
 
   def fill_randomly
     ring_count = rand(1..6) * rand(1..5) + rand(-4..4)
     ring_count.times do
       ring = create_ring
-      @rings << ring
+      @rings << ring unless ring.is_a?(NullRing)
       @dots << ring.dots unless ring.dots.empty?
     end
     @dots.flatten!
@@ -24,10 +29,6 @@ class Level
     @dots = []
   end
 
-  def self.create_random
-    new.fill_randomly
-  end
-
   private
 
   def create_ring
@@ -35,6 +36,15 @@ class Level
     ring = Ring.new(opts)
     ring.add_random_dots
     existing_ring = @rings.select { |r| r.position == ring.position }
-    existing_ring.first || ring
+    if existing_ring.first.nil?
+      return ring
+    else
+      return NullRing.new
+    end
+  end
+
+  def random_ring_count
+    count = rand(1..6) * rand(1..5) + rand(-4..4)
+    [count, 2].max
   end
 end

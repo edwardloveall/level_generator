@@ -1,6 +1,10 @@
 root = Dir.pwd
-files = ['cascade/vector2d', 'cascade/level', 'cascade/ring', 'cascade/dot']
+files = ['vector2d',
+         'null_ring',
+         'level',
+         'ring',
+         'dot']
 
 files.each do |file|
-  require "#{root}/#{file}"
+  require "#{root}/cascade/#{file}"
 end
