@@ -1,14 +1,15 @@
 class Dot
   attr_accessor :position, :ring, :direction
 
-  def initialize(opts = {})
-    @ring = opts[:ring]
-    if @ring
+  def initialize(ring: nil,
+                 position: Vector2d.new(0, 0),
+                 direction: Vector2d.up)
+    if @ring = ring
       @position = @ring.position
     else
-      @position = opts[:position] || Vector2d.new(0, 0)
+      @position = position
     end
-    @direction = opts[:direction] || Vector2d.up
+    @direction = direction
   end
 
   def inspect

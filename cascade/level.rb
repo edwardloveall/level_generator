@@ -6,7 +6,7 @@ class Level
   attr_accessor :rings, :dots
   attr_reader :seed
 
-  def initialize(seed = nil)
+  def initialize(seed: nil)
     @rings = []
     @dots = []
     @seed = seed || Random.new_seed
@@ -14,7 +14,7 @@ class Level
   end
 
   def self.create_from_seed(seed)
-    new(seed).fill_randomly!
+    new(seed: seed).fill_randomly!
   end
 
   def self.create_random

@@ -9,9 +9,9 @@ class Ring
   attr_accessor :position, :dots
   attr_reader :exploded
 
-  def initialize(opts = {})
-    @position = opts[:position] || Vector2d.new(0, 0)
-    @dots = []
+  def initialize(position: Vector2d.new(0, 0), dots: [])
+    @position = position
+    @dots = dots
     @exploded = false
   end
 
@@ -19,7 +19,7 @@ class Ring
     "#<Ring @position=#{@position} dots: #{@dots.count}>"
   end
 
-  def trigger(dot = Dot.new)
+  def trigger(dot: Dot.new)
     add_dot(dot)
 
     if full?

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Level do
   describe '.initialize' do
     it 'sets the seed value when passed in' do
-      level = Level.new(1)
+      level = Level.new(seed: 1)
 
       expect(level.seed).to eq(1)
     end
@@ -100,7 +100,7 @@ describe Level do
 
   describe 'private .create_ring' do
     before(:each) do
-      @level = Level.new(4)
+      @level = Level.new(seed: 4)
       @ring = @level.send(:create_ring)
     end
 
@@ -129,7 +129,7 @@ describe Level do
     end
 
     it 'returns a value of 2 if the random value created is less than 2' do
-      count = Level.new(SMALL_LEVEL_SEED).send(:random_ring_count)
+      count = Level.new(seed: SMALL_LEVEL_SEED).send(:random_ring_count)
 
       expect(count).to be(2)
     end

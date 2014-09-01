@@ -29,7 +29,7 @@ describe Ring do
       @dot = Dot.new
       @ring = Ring.new(position: Vector2d.new(2, 3))
 
-      @ring.trigger(@dot)
+      @ring.trigger(dot: @dot)
     end
 
     it 'adds the dot to its array of dots' do

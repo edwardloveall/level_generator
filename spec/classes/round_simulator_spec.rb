@@ -13,7 +13,9 @@ describe RoundSimulator do
     it 'calls all the simulation methods' do
       round = basic_round
 
-      expect(round).to receive(:trigger_ring).at_least(:once)
+      expect(round).to receive(:trigger_ring).
+                       and_return(Ring.new).
+                       at_least(:once)
       expect(round).to receive(:move_dots).at_least(:once)
       expect(round).to receive(:resolve_collisions).at_least(:once)
       expect(round).to receive(:clean_up).at_least(:once)
@@ -26,9 +28,9 @@ describe RoundSimulator do
       solution = [].fill(Vector2d.new(7, 5), 0, 4)
       solution.fill(Vector2d.new(1, 7), 4, 2)
       round = RoundSimulator.new(solution: solution, seed: SMALL_LEVEL_SEED)
-      move_count = round.simulate
+      solved_with = round.simulate
 
-      expect(move_count).to be_a(Fixnum)
+      expect(solved_with).to eq(solution)
     end
   end
 
@@ -38,7 +40,7 @@ describe RoundSimulator do
       ring = round.level.rings.first
       expect(ring).to receive(:trigger)
 
-      round.trigger_ring(ring.position)
+      round.trigger_ring(position: ring.position)
     end
   end
 

@@ -8,7 +8,10 @@ class RoundSimulator
 
   def simulate
     @solution.each_with_index do |move, i|
-      trigger_ring(move)
+      if trigger_ring(position: move).nil?
+        @solution[i] = nil
+        next
+      end
       loop do
         move_dots
         resolve_collisions
@@ -16,14 +19,14 @@ class RoundSimulator
         break if @level.detached_dots.empty?
       end
       if complete?
-        return i
+        return solution.flatten
       end
     end
   end
 
-  def trigger_ring(position)
+  def trigger_ring(position: position)
     ring = @level.mechanic_at(position)
-    ring.trigger
+    ring.trigger if ring
   end
 
   def move_dots
@@ -36,7 +39,7 @@ class RoundSimulator
     @level.dots.each do |dot|
       mechanic = @level.mechanic_at(dot.position)
       if !mechanic.nil?
-        mechanic.trigger(dot)
+        mechanic.trigger(dot: dot)
       end
     end
   end
