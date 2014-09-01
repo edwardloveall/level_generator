@@ -1,6 +1,8 @@
 root = Dir.pwd
 files = ['vector2d',
          'null_ring',
+         'simulator',
+         'round_simulator',
          'level',
          'ring',
          'dot']

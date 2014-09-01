@@ -45,14 +45,29 @@ describe Dot do
     it 'returns true when no ring is associated' do
       dot = Dot.new(ring: nil)
 
-      expect(dot.detached?).to be_truthy
+      expect(dot).to be_detached
     end
 
     it 'returns false when a ring is associated' do
       ring = Ring.new
       dot = Dot.new(ring: ring)
 
-      expect(dot.detached?).to be_falsey
+      expect(dot).to_not be_detached
+    end
+  end
+
+  describe '.attached?' do
+    it 'returns false when no ring is associated' do
+      dot = Dot.new(ring: nil)
+
+      expect(dot).to_not be_attached
+    end
+
+    it 'returns true when a ring is associated' do
+      ring = Ring.new
+      dot = Dot.new(ring: ring)
+
+      expect(dot).to be_attached
     end
   end
 
@@ -78,6 +93,20 @@ describe Dot do
       dot.move
 
       expect(dot.position).to eq(Vector2d.new(3, 5))
+    end
+  end
+
+  describe '.out_of_bounds?' do
+    it 'returns false if in bounds' do
+      dot = Dot.new(position: Vector2d.new(1, 2))
+
+      expect(dot).to_not be_out_of_bounds
+    end
+
+    it 'returns true of out of bounds' do
+      dot = Dot.new(position: Vector2d.new(8, -1))
+
+      expect(dot).to be_out_of_bounds
     end
   end
 end

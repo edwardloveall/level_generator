@@ -7,10 +7,12 @@ class Ring
   ]
 
   attr_accessor :position, :dots
+  attr_reader :exploded
 
   def initialize(opts = {})
     @position = opts[:position] || Vector2d.new(0, 0)
     @dots = []
+    @exploded = false
   end
 
   def inspect
@@ -25,18 +27,27 @@ class Ring
     end
   end
 
-  def explode!
-    @dots.each do |dot|
-      dot.detach
-    end
-    @dots = []
-  end
-
   def add_dot(dot)
     dot.direction = DOT_DIRECTIONS[@dots.count]
     @dots << dot
     dot.ring = self
     dot.position = @position
+  end
+
+  def explode!
+    @dots.each do |dot|
+      dot.detach
+    end
+    @dots = []
+    @exploded = true
+  end
+
+  def full?
+    @dots.count >= 4
+  end
+
+  def exploded?
+    @exploded
   end
 
   def add_random_dots
@@ -45,7 +56,7 @@ class Ring
     end
   end
 
-  def full?
-    @dots.count >= 4
+  def moves_left
+    4 - @dots.count
   end
 end

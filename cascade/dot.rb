@@ -19,11 +19,26 @@ class Dot
     @ring.nil?
   end
 
+  def attached?
+    !detached?
+  end
+
   def detach
     @ring = nil
   end
 
   def move
     @position += @direction
+  end
+
+  def out_of_bounds?
+    if position.x > Level::BOUNDS.x ||
+       position.x < 0 ||
+       position.y > Level::BOUNDS.y ||
+       position.y < 0
+      return true
+    else
+      return false
+    end
   end
 end

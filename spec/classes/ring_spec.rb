@@ -8,6 +8,12 @@ describe Ring do
 
       expect(ring.position).to eq(position)
     end
+
+    it "isn't exploded" do
+      ring = Ring.new
+
+      expect(ring).to_not be_exploded
+    end
   end
 
   describe '.inspect' do
@@ -57,14 +63,20 @@ describe Ring do
   end
 
   describe '.explode!' do
-    it 'detaches all the dots' do
+    before(:each) do
       @ring = Ring.new
       @ring.trigger
-      dots = @ring.dots
+      @dots = @ring.dots
 
       @ring.explode!
+    end
 
-      expect(dots.map(&:ring)).to eq([nil])
+    it 'detaches all the dots' do
+      expect(@dots.map(&:ring)).to eq([nil])
+    end
+
+    it 'is exploded' do
+      expect(@ring).to be_exploded
     end
   end
 
@@ -81,7 +93,18 @@ describe Ring do
     end
 
     it "set's the dots direction" do
+      allow(@ring).to receive(:explode!)
+
       expect(@dot.direction).to eq(Vector2d.up)
+
+      @ring.add_dot(dot = Dot.new)
+      expect(dot.direction).to eq(Vector2d.right)
+
+      @ring.add_dot(dot = Dot.new)
+      expect(dot.direction).to eq(Vector2d.down)
+
+      @ring.add_dot(dot = Dot.new)
+      expect(dot.direction).to eq(Vector2d.left)
     end
 
     it "sets the dot's ring" do
@@ -110,5 +133,18 @@ describe Ring do
 
       expect(@ring).to_not be_full
     end
+  end
+
+  describe '.moves_left' do
+    it 'displays the number of times it can be triggered' do
+      ring = Ring.new
+      ring.trigger
+
+      expect(ring.moves_left).to eq(3)
+    end
+  end
+
+  describe '.exploded?' do
+
   end
 end
