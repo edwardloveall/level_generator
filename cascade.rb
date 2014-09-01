@@ -10,3 +10,5 @@ files = ['vector2d',
 files.each do |file|
   require "#{root}/cascade/#{file}"
 end
+
+require 'ruby-progressbar'
