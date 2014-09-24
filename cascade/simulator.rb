@@ -1,9 +1,9 @@
 class Simulator
   attr_reader :seed, :solutions, :level, :best_solution
 
-  def initialize(seed: seed)
+  def initialize(level: level)
     @seed = seed
-    @level = Level.create_from_seed(seed)
+    @level = level
     @solutions = @level.triggers.permutation
     @best_solution = @level.triggers
   end
@@ -11,7 +11,7 @@ class Simulator
   def simulate
     progress = create_progress_bar
     @solutions.each do |solution|
-      round = RoundSimulator.new(solution: solution, seed: @seed)
+      round = RoundSimulator.new(solution: solution, level: @level)
       solution = round.simulate
       if solution.count < best_solution.count
         best_solution = solution
