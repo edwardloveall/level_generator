@@ -1,9 +1,9 @@
 class RoundSimulator
   attr_accessor :solution, :level
 
-  def initialize(solution: nil, seed: nil)
+  def initialize(solution: nil, level: nil)
     @solution = solution
-    @level = Level.create_from_seed(seed)
+    @level = level
   end
 
   def simulate

@@ -1,5 +1,5 @@
 def small_level
-  Level.new(SMALL_LEVEL_SEED).fill_randomly!
+  Level.new(seed: SMALL_LEVEL_SEED).fill_randomly!
 end
 
 def single_step_level

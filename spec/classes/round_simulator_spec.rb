@@ -27,7 +27,7 @@ describe RoundSimulator do
     it 'returns the moves it took' do
       solution = [].fill(Vector2d.new(7, 5), 0, 4)
       solution.fill(Vector2d.new(1, 7), 4, 2)
-      round = RoundSimulator.new(solution: solution, seed: SMALL_LEVEL_SEED)
+      round = RoundSimulator.new(solution: solution, level: small_level)
       solved_with = round.simulate
 
       expect(solved_with).to eq(solution)
