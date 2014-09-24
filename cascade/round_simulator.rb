@@ -3,7 +3,7 @@ class RoundSimulator
 
   def initialize(solution: nil, level: nil)
     @solution = solution
-    @level = level
+    @level = level.dup
   end
 
   def simulate

@@ -7,6 +7,13 @@ describe RoundSimulator do
 
       expect(round.solution).to eq(@solution)
     end
+
+    it 'does a deep copy of level' do
+      level = small_level
+      round = RoundSimulator.new(level: level)
+
+      expect(level.rings).to_not be(round.level.rings)
+    end
   end
 
   describe '.simulate' do
@@ -82,11 +89,11 @@ describe RoundSimulator do
     it 'removes all dots from the level that are out of bounds' do
       level = Level.new
       level.dots << Dot.new(position: Vector2d.new(-1, 0))
-      round = round_with_level(level)
+      round = RoundSimulator.new(level: level)
 
       round.clean_up_dots
 
-      expect(level.dots).to be_empty
+      expect(round.level.dots).to be_empty
     end
   end
 
@@ -95,18 +102,18 @@ describe RoundSimulator do
       level = Level.new
       level.rings << ring = Ring.new
       ring.explode!
-      round = round_with_level(level)
+      round = RoundSimulator.new(level: level)
 
       round.clean_up_rings
 
-      expect(level.rings).to be_empty
+      expect(round.level.rings).to be_empty
     end
   end
 
   describe '.complete?' do
     it 'is complete when there are no rings left' do
       level = Level.new
-      round = round_with_level(level)
+      round = RoundSimulator.new(level: level)
 
       expect(round).to be_complete
     end

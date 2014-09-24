@@ -51,6 +51,13 @@ class Level
     @dots.select { |dot| dot.detached? }
   end
 
+  def dup
+    copy = super
+    @rings = copy.rings.dup
+    @dots = copy.dots.dup
+    copy
+  end
+
   private
 
   def create_ring

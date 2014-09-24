@@ -98,6 +98,28 @@ describe Level do
     end
   end
 
+  describe '.dup' do
+    before(:each) do
+      @level = Level.new
+    end
+
+    it 'makes a copy of the rings' do
+      @level.rings << Ring.new
+
+      copy = @level.dup
+
+      expect(copy.rings).to_not be(@level.rings)
+    end
+
+    it 'makes a copy of the dots' do
+      @level.rings << Dot.new
+
+      copy = @level.dup
+
+      expect(copy.dots).to_not be(@level.dots)
+    end
+  end
+
   describe 'private .create_ring' do
     before(:each) do
       @level = Level.new(seed: 4)
