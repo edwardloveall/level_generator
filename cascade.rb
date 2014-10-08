@@ -5,7 +5,8 @@ files = ['vector2d',
          'round_simulator',
          'level',
          'ring',
-         'dot']
+         'dot',
+         'level_parser']
 
 files.each do |file|
   require "#{root}/cascade/#{file}"

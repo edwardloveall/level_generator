@@ -1,0 +1,14 @@
+{
+  "par": 4,
+  "min": 4,
+  "rings": [
+    {
+      "position": [2, 4],
+      "dots": 0
+    },
+    {
+      "position": [5, 4],
+      "dots": 3
+    }
+  ]
+}

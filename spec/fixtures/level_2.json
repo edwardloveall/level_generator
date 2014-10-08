@@ -1,0 +1,38 @@
+{
+  "par": 10,
+  "min": 7,
+  "rings": [
+    {
+      "position": [2, 5],
+      "dots": 0
+    },
+    {
+      "position": [2, 4],
+      "dots": 1
+    },
+    {
+      "position": [2, 3],
+      "dots": 2
+    },
+    {
+      "position": [2, 2],
+      "dots": 3
+    },
+    {
+      "position": [5, 5],
+      "dots": 0
+    },
+    {
+      "position": [5, 4],
+      "dots": 1
+    },
+    {
+      "position": [5, 3],
+      "dots": 2
+    },
+    {
+      "position": [5, 2],
+      "dots": 3
+    }
+  ]
+}
